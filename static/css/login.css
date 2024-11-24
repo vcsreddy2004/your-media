@@ -1,0 +1,28 @@
+.user-ico {
+    font-size: 200;
+    background: linear-gradient(to right, #f32170, 
+                #ff6b08, #cf23cf, #eedd44); 
+                -webkit-text-fill-color: transparent; 
+                -webkit-background-clip: text; 
+    text-align: center;
+    padding:10%;
+}
+input {
+    width:100%;
+}
+form * {
+    margin-top:3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+input[type='button'],[type='submit'] {
+    background-color: darkgreen;
+    color:white;
+}
+.badge {
+    font-size: 30;
+}
+form span {
+    font-size: 30;
+}
