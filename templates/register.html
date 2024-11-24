@@ -4,7 +4,7 @@
 <html>
     <head>
         <title>
-            Home
+            Register
         </title>
     </head>
     <body>
@@ -14,11 +14,11 @@
                     <div class="card bg-dark col-md-6 border-0">
                         <i class="fas fa-user-alt user-ico"></i>
                     </div>
-                    <form action="/login" method="POST" enctype="multipart/form-data" class="col-md-6 px-0">
+                    <form action="/register" method="POST" enctype="multipart/form-data" class="col-md-6 px-0">
                         <!-- <div class="alert alert-danger col-md-12 bg-danger border-0 mt-0">
                            Error
                         </div> -->
-                        {% csrf_token %}
+                        {% csrf_token %}    
                         <span>First Name</span>
                         <input type="text" name="firstName" />
                         <span>Last Name</span>
