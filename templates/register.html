@@ -1,6 +1,6 @@
 {% include 'navbar.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
 <html>
     <head>
         <title>
@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="card px-3 bg-dark text-white mt-5">
+            <div class="card px-3 bg-dark text-white mt-3">
                 <div class="row">
                     <div class="card bg-dark col-md-6 border-0">
                         <i class="fas fa-user-alt user-ico"></i>
@@ -19,14 +19,19 @@
                            Error
                         </div> -->
                         {% csrf_token %}
+                        <span>First Name</span>
+                        <input type="text" name="firstName" />
+                        <span>Last Name</span>
+                        <input type="text" name="lastName" />
+                        <span>Email</span>
+                        <input type="text" name="email" />
                         <span>Username</span>
                         <input type="text" name="username" />
                         <span>Passord</span>
                         <input type="password" name="password" />
-                        <input class="border-0" type="submit" value="Log in" />
-                        <a href="/register" class="mt-0">
-                            <input class="border-0" type="button" value="Register" />
-                        </a>
+                        <span>Conform Passord</span>
+                        <input type="password" name="conformPassword" />
+                        <input class="border-0" type="submit" value="Register" />
                     </form>
                 </div>
             </div>
