@@ -1,0 +1,9 @@
+.card i {
+    margin:auto;
+}
+.row .card:first-child {
+    border-radius: 5px 0px 0px 5px !important;
+}
+.row .card:last-child {
+    border-radius: 0px 5px 5px 0px !important;
+}

@@ -69,3 +69,12 @@ def register(req):
                 user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
                 return redirect('/login') 
     return render(req, "register.html", {'errors': errors})
+@login_required(login_url="/login")
+def profile(req):
+    user = {
+        'firstName':req.user.first_name,
+        'lastName':req.user.last_name,
+        'email':req.user.email,
+        'username':req.user.username
+    }
+    return render(req,'profile.html',{'user':user})
