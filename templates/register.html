@@ -15,9 +15,13 @@
                         <i class="fas fa-user-alt user-ico"></i>
                     </div>
                     <form action="/register" method="POST" enctype="multipart/form-data" class="col-md-6 px-0">
-                        <!-- <div class="alert alert-danger col-md-12 bg-danger border-0 mt-0">
-                           Error
-                        </div> -->
+                        {% if errors %}
+                            {% for error in errors %}
+                                <div class="alert alert-danger col-md-12 bg-danger border-0 mt-0">
+                                    {{error}}
+                                </div> 
+                            {% endfor %}
+                        {% endif %}
                         {% csrf_token %}    
                         <span>First Name</span>
                         <input type="text" name="firstName" />
@@ -30,11 +34,12 @@
                         <span>Passord</span>
                         <input type="password" name="password" />
                         <span>Conform Passord</span>
-                        <input type="password" name="conformPassword" />
+                        <input type="password" name="confirmPassword" />
                         <input class="border-0" type="submit" value="Register" />
                     </form>
                 </div>
             </div>
         </div>
+        <script src="{% static 'js/register.js' %}"></script>
     </body>
 </html>
