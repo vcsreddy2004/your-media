@@ -1,13 +1,36 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User  
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-# Create your views here.
+@login_required(login_url='/login')
 def home(req):
     return render(req,"index.html")
-def login(req):
-    return render(req,"login.html")
+def loginPage(req):
+    errors = [] 
+    if req.method == "POST":
+        username = req.POST.get('username','').strip()
+        password = req.POST.get('password','').strip()
+        if username=="":
+            errors.append("Username can not left empty")
+        elif password=="":
+            errors.append("Password can not left empty")
+        else:
+            if not User.objects.filter(username=username).exists():
+                errors.append("User name not exist")
+            else:
+                user = authenticate(username=username,password=password)
+                if user is None:
+                    errors.append("invalid password")
+                else:
+                    login(req,user)
+                    return redirect('/')
+    return render(req,"login.html",{'errors':errors})
+def userLogOut(req):
+    logout(req)
+    return redirect('/')
 def register(req):
     errors = []
     if req.method == "POST":
