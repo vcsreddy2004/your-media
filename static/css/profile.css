@@ -7,3 +7,10 @@
 .row .card:last-child {
     border-radius: 0px 5px 5px 0px !important;
 }
+.text-costume table tr td {
+    color:rgb(187, 187, 187);
+}
+table tr td {
+    width:50%;
+    padding:10px;
+}

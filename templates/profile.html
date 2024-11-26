@@ -14,9 +14,33 @@
                     <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg">
                         <i class="far fa-user-circle display-1 text-white"></i>
                     </div>
-                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg">
-                        <span>Username</span>
-                        <span>{{user.firstName}}</span>
+                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg text-costume">
+                        <table>
+                            <tr>
+                                <td>
+                                    First Name
+                                </td>
+                                <td>
+                                    {{user.firstName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Last Name
+                                </td>
+                                <td>
+                                    {{user.lastName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    {{user.username}}
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
