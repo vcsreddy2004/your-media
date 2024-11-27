@@ -9,27 +9,27 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     </head>
     <body>
-        <div class="card col-md-6 m-auto shadow-lg mt-3">
-            <div class="card">
+            <div class="card col-md-6 m-auto shadow-lg mt-3">
                 <div class="card-header">
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}    
                         <details>
                             <summary>New Post</summary>
                             {{form.as_p}}
-                            <input type="submit" value="Submit" />
+                            <input type="submit" class="border-0" value="Submit" />
                         </details>
                     </form>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, accusamus esse! Voluptates, dolor minus quia blanditiis molestias maxime consectetur odio? Magni cupiditate ad similique. Amet dolore id quod rerum voluptatum!
+            {% for post in posts %}
+                <div class="card mt-3 col-md-6 m-auto shadow-lg">
+                    <div class="card-header">
+                        {{post.text | safe}}
+                    </div>
+                    <div class="card-body">
+                        <img src="media/{{post.image}}" alt="" width="100%" height="500px   " />
+                    </div>
                 </div>
-                <div class="card-body">
-
-                </div>
-            </div>
-        </div> 
+            {% endfor %}
     </body>
 </html>

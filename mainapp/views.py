@@ -5,16 +5,18 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from mainapp.forms import PostsForm
+from .models import Posts
 @login_required(login_url='/login')
 def home(req):
     if req.method == "POST":
-        form = PostsForm(req.POST)
+        form = PostsForm(req.POST,req.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
         form = PostsForm()
-    return render(req,"index.html",{"form":form})
+        objects = Posts.objects.all()
+    return render(req,"index.html",{"form":form,"posts":objects})
 def loginPage(req):
     errors = [] 
     if req.method == "POST":
