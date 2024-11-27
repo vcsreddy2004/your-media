@@ -15,7 +15,8 @@
                         {% csrf_token %}    
                         <details>
                             <summary>New Post</summary>
-                            {{form.as_p}}
+                            {{form.text}}
+                            {{form.image}}<br/>
                             <input type="submit" class="border-0" value="Submit" />
                         </details>
                     </form>
