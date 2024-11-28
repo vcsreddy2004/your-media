@@ -6,6 +6,10 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from mainapp.forms import PostsForm
 from .models import Posts
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+import os
+from django.core.files.storage import default_storage
 @login_required(login_url='/login')
 def home(req):
     if req.method == "POST":
@@ -84,6 +88,44 @@ def profile(req):
         'firstName':req.user.first_name,
         'lastName':req.user.last_name,
         'email':req.user.email,
-        'username':req.user.username
+        'username':req.user.username,
+        'image':''
     }
+    image_filename = f"{req.user.username}.jpg" 
+    image_path = os.path.join('profiles', image_filename)
+    if default_storage.exists(image_path):
+        user['image'] = settings.MEDIA_URL + image_path
     return render(req,'profile.html',{'user':user})
+def checkImage(req):
+    if req.user.is_authenticated:
+        image_filename = f"{req.user.username}.jpg" 
+        image_path = os.path.join('profiles', image_filename)
+        if default_storage.exists(image_path):
+            path = settings.MEDIA_URL + image_path
+        else:
+            path = ""
+    else:
+        path=""
+    return path
+def profileUpload(req):
+    if req.user.is_authenticated:
+        if req.method == 'POST' and 'image' in req.FILES:
+            image = req.FILES['image']
+            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'profiles'))
+            filename = f"{req.user.username}.jpg"
+            image_path = os.path.join(settings.MEDIA_ROOT, 'profiles', filename)
+            if os.path.isfile(image_path):
+                os.remove(image_path)
+            fs.save(filename, image)
+        return redirect('/profile')
+    else:
+        return redirect('/login')
+def profileDelete(req):
+    if req.user.is_authenticated:
+        filename = f"{req.user.username}.jpg"
+        image_path = os.path.join(settings.MEDIA_ROOT, 'profiles', filename)
+        if os.path.isfile(image_path):
+            os.remove(image_path)
+        return redirect('/profile')
+    else:
+        return redirect('/login')

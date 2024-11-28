@@ -11,10 +11,23 @@
         <div class="container mt-5">
             <div class="card shadow-lg">
                 <div class="row">
-                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg">
-                        <i class="far fa-user-circle display-1 text-white"></i>
+                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg p-0 pt-5">
+                        {% if user.image != '' %}
+                            <img src="{{user.image}}" width="200px" height="200px" class="m-auto rounded-circle" />
+                        {% else %}
+                            <i class="far fa-user-circle display-1 text-white"></i>
+                        {% endif %}
+                        <form action="/profile-upload" method="post" enctype="multipart/form-data" class="m-0">
+                            {% csrf_token %}
+                            <input type="file" name="image" id="profile" accept="image/.jpg.jpeg" />
+                        </form>
+                        <label for="profile" class="file mt-5 mx-0 text-center" ><i class="bi bi-upload"></i> upload</label>
+                        <a href="/profile-delete">  
+                            <input type="button" id="delete" />
+                            <label for="delete" class="delete col-md-12 bg-danger border-0 text-white p-2 text-center"  ><i class='fa fa-trash'></i> upload</label>
+                        </a>
                     </div>
-                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg text-costume">
+                    <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg text-costume pt-5">
                         <table>
                             <tr>
                                 <td>
@@ -45,5 +58,10 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementById('profile').addEventListener('change', function() {
+              this.form.submit();
+            });
+        </script>
     </body>
 </html>
