@@ -95,7 +95,7 @@ def profile(req):
     image_path = os.path.join('profiles', image_filename)
     if default_storage.exists(image_path):
         user['image'] = settings.MEDIA_URL + image_path
-    return render(req,'profile.html',{'user':user})
+    return render(req,'profile.html',{'userData':user})
 def checkImage(req):
     if req.user.is_authenticated:
         image_filename = f"{req.user.username}.jpg" 

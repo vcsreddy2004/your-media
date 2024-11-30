@@ -12,8 +12,8 @@
             <div class="card shadow-lg">
                 <div class="row">
                     <div class="card col-md-6 m-0 border-0 bg-dark shadow-lg p-0 pt-5">
-                        {% if user.image != '' %}
-                            <img src="{{user.image}}" width="200px" height="200px" class="m-auto rounded-circle" />
+                        {% if userData.image != '' %}
+                            <img src="{{userData.image}}" width="200px" height="200px" class="m-auto rounded-circle" />
                         {% else %}
                             <i class="far fa-user-circle display-1 text-white"></i>
                         {% endif %}
@@ -34,7 +34,7 @@
                                     First Name
                                 </td>
                                 <td>
-                                    {{user.firstName}}
+                                    {{userData.firstName}}
                                 </td>
                             </tr>
                             <tr>
@@ -42,7 +42,7 @@
                                     Last Name
                                 </td>
                                 <td>
-                                    {{user.lastName}}
+                                    {{userData.lastName}}
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +50,7 @@
                                     Username
                                 </td>
                                 <td>
-                                    {{user.username}}
+                                    {{userData.username}}
                                 </td>
                             </tr>
                         </table>
