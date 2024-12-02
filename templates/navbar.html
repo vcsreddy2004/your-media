@@ -12,7 +12,11 @@
         {% if user.is_authenticated %}
             <div class="nav_item px-5">
                 <div class="dropdown nav-link">
-                  <i class="dropbtn far fa-user"></i>
+                    <img src="media/profiles/{{user.username}}.jpg" 
+                    width="30" height="30" 
+                    alt="User Profile" 
+                    class="rounded-circle mx-2" 
+                    onerror="this.onerror=null;this.src='media/profiles/default.png';" />               
                   <div class="dropdown-content bg-dark">
                     <a href="/profile">Profile</a>
                     <a href="/logout">Log out</a>
