@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout',views.userLogOut),
     path('profile-upload',views.profileUpload),
     path('profile-delete',views.profileDelete),
+    path('fetch_posts/', views.fetch_posts, name='fetch_posts'),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

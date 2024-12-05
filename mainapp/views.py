@@ -10,6 +10,10 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 import os
 from django.core.files.storage import default_storage
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.views.decorators.csrf import csrf_exempt
+
 @login_required(login_url='/login')
 def home(req):
     if req.method == "POST":
@@ -19,8 +23,26 @@ def home(req):
             return redirect('/')
     else:
         form = PostsForm()
-        objects = Posts.objects.all()
-    return render(req,"index.html",{"form":form,"posts":objects})
+    return render(req,"index.html",{"form":form})
+@csrf_exempt
+def fetch_posts(request):
+    if request.method == 'GET':
+        page_number = request.GET.get('page', 1)
+        posts_list = Posts.objects.all()
+        paginator = Paginator(posts_list, 1)  # 5 posts per request
+
+        try:
+            posts_page = paginator.page(page_number)
+        except EmptyPage:
+            return JsonResponse({'posts': [], 'has_more': False})
+
+        posts_data = [
+            {'text': post.text, 'image_url': post.image.url if post.image.url else ''}
+            for post in posts_page
+        ]
+
+        return JsonResponse({'posts': posts_data, 'has_more': posts_page.has_next()})
+
 def loginPage(req):
     errors = [] 
     if req.method == "POST":
