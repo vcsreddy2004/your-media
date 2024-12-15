@@ -14,7 +14,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 
-
+@login_required(login_url="/login")
 def home(req):
     if req.method == "POST":
         form = PostsForm(req.POST,req.FILES)
