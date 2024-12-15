@@ -26,6 +26,7 @@ def home(req):
         objects = Posts.objects.all()
     return render(req,"index.html",{"form":form,"posts":objects})
 def loginPage(req):
+    errors = []
     if req.method == "POST":
         username = req.POST.get('username','').strip()
         password = req.POST.get('password','').strip()
