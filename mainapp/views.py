@@ -8,7 +8,6 @@ from mainapp.forms import PostsForm
 from .models import Posts
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
-import os
 from django.core.files.storage import default_storage
 from django.http import JsonResponse
 from django.core.paginator import Paginator
