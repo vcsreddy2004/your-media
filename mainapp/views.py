@@ -14,7 +14,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 
-@login_required(login_url='/login')
+@login_required(login_url="/login")
 def home(req):
     if req.method == "POST":
         form = PostsForm(req.POST,req.FILES)
@@ -44,7 +44,6 @@ def fetch_posts(request):
         return JsonResponse({'posts': posts_data, 'has_more': posts_page.has_next()})
 
 def loginPage(req):
-    errors = [] 
     if req.method == "POST":
         username = req.POST.get('username','').strip()
         password = req.POST.get('password','').strip()
