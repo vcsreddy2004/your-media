@@ -44,6 +44,7 @@ def fetch_posts(request):
         return JsonResponse({'posts': posts_data, 'has_more': posts_page.has_next()})
 
 def loginPage(req):
+    errors = []
     if req.method == "POST":
         username = req.POST.get('username','').strip()
         password = req.POST.get('password','').strip()
