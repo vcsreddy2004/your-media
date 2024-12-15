@@ -10,15 +10,11 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 import os
 from django.core.files.storage import default_storage
-<<<<<<< HEAD
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 
 @login_required(login_url="/login")
-=======
-@login_required(login_url='/login')
->>>>>>> parent of b33fd5d (optimised loading of posts)
 def home(req):
     if req.method == "POST":
         form = PostsForm(req.POST,req.FILES)
