@@ -22,73 +22,15 @@
                     </form>
                 </div>
             </div>
-            <div id="posts-container">
-                {% for post in posts %}
+            {% for post in posts %}
                 <div class="card mt-3 col-md-6 m-auto shadow-lg">
                     <div class="card-header">
-                        {{ post.text | safe }}
+                        {{post.text | safe}}
                     </div>
                     <div class="card-body">
-                        <img src="{{ post.image.url }}" alt="" width="100%" height="500px" />
+                        <img src="media/{{post.image}}" alt="" width="100%" height="500px   " />
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-            <div id="loading" style="text-align:center; display:none;">Loading...</div>
-            <script>
-                let page = 2;
-                let loading = false;
-            
-                function loadMorePosts() {
-                    if (loading) return;
-                    loading = true;
-                    document.getElementById("loading").style.display = "block";
-            
-                    fetch(`/?page=${page}`, {
-                        headers: {
-                            "X-Requested-With": "XMLHttpRequest",
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        document.getElementById("loading").style.display = "none";
-                        const container = document.getElementById("posts-container");
-            
-                        if (data.posts.length === 0) {
-                            window.removeEventListener("scroll", handleScroll);
-                            return;
-                        }
-            
-                        data.posts.forEach((post) => {
-                            const card = document.createElement("div");
-                            card.className = "card mt-3 col-md-6 m-auto shadow-lg";
-            
-                            card.innerHTML = `
-                                <div class="card-header">${post.text}</div>
-                                <div class="card-body">
-                                    <img src="${post.image_url}" alt="" width="100%" height="500px" />
-                                </div>
-                            `;
-                            container.appendChild(card);
-                        });
-            
-                        page++;
-                        loading = false;
-                    })
-                    .catch(() => {
-                        document.getElementById("loading").style.display = "none";
-                        loading = false;
-                    });
-                }
-            
-                function handleScroll() {
-                    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-                    if (scrollTop + clientHeight >= scrollHeight - 5) {
-                        loadMorePosts();
-                    }
-                }
-            
-                window.addEventListener("scroll", handleScroll);
-            </script>            
+            {% endfor %}
     </body>
 </html>

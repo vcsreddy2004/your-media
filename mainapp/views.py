@@ -16,32 +16,14 @@ from django.views.decorators.csrf import csrf_exempt
 
 def home(req):
     if req.method == "POST":
-        form = PostsForm(req.POST, req.FILES)
+        form = PostsForm(req.POST,req.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
         form = PostsForm()
-
-    if req.headers.get('x-requested-with') == 'XMLHttpRequest':
-        page = int(req.GET.get('page', 1))
-        posts = Posts.objects.all().order_by('-id')
-        paginator = Paginator(posts, 3)
-        try:
-            posts_page = paginator.page(page)
-        except:
-            return JsonResponse({'posts': []})
-
-        posts_data = [
-            {
-                'text': post.text,
-                'image_url': post.image.url,
-            } for post in posts_page
-        ]
-        return JsonResponse({'posts': posts_data})
-    initial_posts = Posts.objects.all().order_by('-id')[:3]
-    return render(req, "index.html", {"form": form, "posts": initial_posts})
-
+        objects = Posts.objects.all()
+    return render(req,"index.html",{"form":form,"posts":objects})
 def loginPage(req):
     errors = []
     if req.method == "POST":
