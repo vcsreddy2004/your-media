@@ -41,7 +41,7 @@ activate
 5) Run `cd..` two time in order to get into the main project folder.
 6) Run the fallowing command to install dependencies
 ```
-pip install django django-ckeditor pillow
+pip install -r requirements.txt
 ```
 7) Finnaly run the fallowing command to start project.
 ```
